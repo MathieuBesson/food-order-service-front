@@ -42,14 +42,6 @@ function App() {
         setDishs(dishs);
     };
 
-    const getFoodsFromApi = async (foods) => {
-        return await foods.map(async (food) => {
-            return await fetch(`http://localhost:3000/foods/${food._id}`).then(
-                (response) => response.json()
-            );
-        });
-    };
-
     return (
         <div className="container mx-auto mt-10">
             {dishs.map((dishType, key) => (
@@ -60,7 +52,7 @@ function App() {
                     <div className="grid grid-cols-4 gap-4 mb-10">
                         {dishType.items.map((dish, dishKey) => (
                             <div key={dishKey}>
-                                <div className="mb-4 rounded overflow-hidden shadow-lg">
+                                <div className="mb-4 rounded overflow-hidden shadow-lg relative">
                                     <img
                                         className="w-full h-40"
                                         src={dish.image}
@@ -75,9 +67,62 @@ function App() {
                                                 key={foodKey}
                                                 className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
                                             >
-                                                {food.name}
+                                                {capitalizeFirstLetter(
+                                                    food.name
+                                                )}
                                             </span>
                                         ))}
+                                    </div>
+                                    <div className="flex justify-between mx-3 my-5">
+                                        {dish.disponibility > 0 ? (
+                                            <>
+                                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                                    Commander
+                                                </button>
+                                                <svg
+                                                    className="h-8 w-8 text-green-500"
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth="2"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                >
+                                                    {" "}
+                                                    <path
+                                                        stroke="none"
+                                                        d="M0 0h24v24H0z"
+                                                    />{" "}
+                                                    <circle
+                                                        cx="12"
+                                                        cy="12"
+                                                        r="9"
+                                                    />{" "}
+                                                    <path d="M9 12l2 2l4 -4" />
+                                                </svg>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">
+                                                    Indisponible
+                                                </button>
+                                                <svg
+                                                    className="h-8 w-8 text-red-500"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                    />
+                                                </svg>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>
