@@ -9,7 +9,7 @@ Client (PUBLIC):
 
 Client Auth => Authentifié Client :
 
--   [ ] Commander des plats (Clique sur le + = ajout au panier)
+-   [X] Commander des plats (Clique sur le + = ajout au panier)
 -   [ ] Clique sur le panier (Liste des plats du panier + changer la quantité)
 -   [ ] Simulation d'un écran de paiement + redirection vers la liste des plats
 

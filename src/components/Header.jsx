@@ -1,4 +1,4 @@
-function App() {
+function App({ toggleCart }) {
     return (
         <header>
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -20,12 +20,45 @@ function App() {
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">
                             Connexion
                         </button>
-                        <button>
-                            <img
-                                src="https://cdn-icons-png.flaticon.com/512/3177/3177845.png"
-                                className="ml-3 mr-3 h-6 sm:h-9"
-                                alt="Food Order Service"
-                            />
+                        <button className="ml-5" onClick={toggleCart}>
+                            <svg
+                                className="h-8 w-8 text-blue-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                                />
+                            </svg>
+                        </button>
+                        <button className="ml-5">
+                            <svg
+                                className="h-8 w-8 text-white"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            >
+                                {" "}
+                                <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                                <rect
+                                    x="5"
+                                    y="11"
+                                    width="14"
+                                    height="10"
+                                    rx="2"
+                                />{" "}
+                                <circle cx="12" cy="16" r="1" />{" "}
+                                <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
+                            </svg>
                         </button>
                     </div>
                     <div

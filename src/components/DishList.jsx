@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "./../utils/stringUtils";
 
-function App() {
+function DishList({ toogleDishToCart, cartDishIds }) {
     const [dishs, setDishs] = useState([]);
 
     useEffect(() => {
@@ -43,13 +43,13 @@ function App() {
     };
 
     return (
-        <div className="container mx-auto mt-10">
+        <div className="container mx-auto mt-10 pb-20">
             {dishs.map((dishType, key) => (
                 <div key={key}>
                     <h2 className="mb-4 text-3xl font-extrabold tracking-tight leading-none md:text-4xl">
                         {capitalizeFirstLetter(dishType.type)}
                     </h2>
-                    <div className="grid grid-cols-4 gap-4 mb-10">
+                    <div className="grid grid-cols-4 gap-4 mt-10">
                         {dishType.items.map((dish, dishKey) => (
                             <div key={dishKey}>
                                 <div className="mb-4 rounded overflow-hidden shadow-lg relative">
@@ -76,11 +76,40 @@ function App() {
                                     <div className="flex justify-between mx-3 my-5">
                                         {dish.disponibility > 0 ? (
                                             <>
-                                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                                    Commander
+                                                <button
+                                                    className={`bg-${
+                                                        cartDishIds.includes(
+                                                            dish._id
+                                                        )
+                                                            ? "green"
+                                                            : "yellow"
+                                                    }-500 hover:bg-${
+                                                        cartDishIds.includes(
+                                                            dish._id
+                                                        )
+                                                            ? "green"
+                                                            : "yellow"
+                                                    }-700 text-white font-bold py-2 px-4 rounded`}
+                                                    onClick={() =>
+                                                        toogleDishToCart(
+                                                            dish._id
+                                                        )
+                                                    }
+                                                >
+                                                    {cartDishIds.includes(
+                                                        dish._id
+                                                    )
+                                                        ? "Commandé !"
+                                                        : "Commander"}
                                                 </button>
                                                 <svg
-                                                    className="h-8 w-8 text-green-500"
+                                                    className={`h-8 w-8 text-${
+                                                        cartDishIds.includes(
+                                                            dish._id
+                                                        )
+                                                            ? "green"
+                                                            : "yellow"
+                                                    }-600`}
                                                     width="24"
                                                     height="24"
                                                     viewBox="0 0 24 24"
@@ -109,7 +138,7 @@ function App() {
                                                     Indisponible
                                                 </button>
                                                 <svg
-                                                    className="h-8 w-8 text-red-500"
+                                                    className="h-8 w-8 text-red-500 opacity-50"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -134,4 +163,4 @@ function App() {
     );
 }
 
-export default App;
+export default DishList;
