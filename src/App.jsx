@@ -1,36 +1,25 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import DishList from "./components/DishList";
-import Cart from "./components/Cart";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Admin from "./pages/Admin";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
+import { useState } from "react";
 
 function App() {
-    const [cartDishIds, setCartDishIds] = useState([]);
-    const [cartState, setCartState] = useState(false);
-
-    const toogleDishToCart = (id) => {
-        if (cartDishIds.includes(id)) {
-            setCartDishIds(
-                cartDishIds.filter(function (item) {
-                    return item !== id;
-                })
-            );
-        } else {
-            setCartDishIds([...cartDishIds, id]);
-        }
-    };
-
-    const toggleCart = () => setCartState(!cartState);
+    const [auth, setAuth] = useState(null);
 
     return (
-        <div className="App">
-            <Header toggleCart={toggleCart}></Header>
-            <DishList
-                toogleDishToCart={toogleDishToCart}
-                cartDishIds={cartDishIds}
-            ></DishList>
-            <Cart toggleCart={toggleCart} cartState={cartState}></Cart>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/">
+                    <Route index element={<Home auth={auth} />} />
+                    <Route
+                        path="auth"
+                        element={<Auth setAuth={setAuth} auth={auth} />}
+                    />
+                    <Route path="admin" element={<Admin auth={auth} />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 

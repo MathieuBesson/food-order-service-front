@@ -15,6 +15,8 @@ You are here on the project's front-end repository
 
 ### Installing
 
+-   Create copy of **.env.example** ans replace by **.env** file and replace with your environnements parameters
+
 -   Dependencies installation :
 
 ```shell

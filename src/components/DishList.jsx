@@ -9,7 +9,7 @@ function DishList({ toogleDishToCart, cartDishIds }) {
     }, []);
 
     const setDishsFromApi = async () => {
-        let dishs = await fetch("http://localhost:3000/dishs/type");
+        let dishs = await fetch(`${import.meta.env.VITE_API_URL}/dishs/type`);
         dishs = await dishs.json();
 
         let foodsId = [];
@@ -25,7 +25,7 @@ function DishList({ toogleDishToCart, cartDishIds }) {
         let foodRequested = {};
         for (const foodId of foodsId) {
             const response = await fetch(
-                `http://localhost:3000/foods/${foodId}`
+                `${import.meta.env.VITE_API_URL}/foods/${foodId}`
             );
             foodRequested[foodId] = await response.json();
         }
@@ -43,7 +43,7 @@ function DishList({ toogleDishToCart, cartDishIds }) {
     };
 
     return (
-        <div className="container mx-auto mt-10 pb-20">
+        <div className="container mx-auto mt-10 mb-10">
             {dishs.map((dishType, key) => (
                 <div key={key}>
                     <h2 className="mb-4 text-3xl font-extrabold tracking-tight leading-none md:text-4xl">
@@ -54,7 +54,7 @@ function DishList({ toogleDishToCart, cartDishIds }) {
                             <div key={dishKey}>
                                 <div className="mb-4 rounded overflow-hidden shadow-lg relative">
                                     <img
-                                        className="w-full h-40"
+                                        className="w-full h-40 object-cover"
                                         src={dish.image}
                                         alt="Sunset in the mountains"
                                     ></img>
@@ -76,40 +76,39 @@ function DishList({ toogleDishToCart, cartDishIds }) {
                                     <div className="flex justify-between mx-3 my-5">
                                         {dish.disponibility > 0 ? (
                                             <>
-                                                <button
-                                                    className={`bg-${
-                                                        cartDishIds.includes(
-                                                            dish._id
-                                                        )
-                                                            ? "green"
-                                                            : "yellow"
-                                                    }-500 hover:bg-${
-                                                        cartDishIds.includes(
-                                                            dish._id
-                                                        )
-                                                            ? "green"
-                                                            : "yellow"
-                                                    }-700 text-white font-bold py-2 px-4 rounded`}
-                                                    onClick={() =>
-                                                        toogleDishToCart(
-                                                            dish._id
-                                                        )
-                                                    }
-                                                >
-                                                    {cartDishIds.includes(
-                                                        dish._id
-                                                    )
-                                                        ? "Commandé !"
-                                                        : "Commander"}
-                                                </button>
+                                                {cartDishIds.includes(
+                                                    dish._id
+                                                ) ? (
+                                                    <button
+                                                        className={`bg-green-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded`}
+                                                        onClick={() =>
+                                                            toogleDishToCart(
+                                                                dish._id
+                                                            )
+                                                        }
+                                                    >
+                                                        Commandé !
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        className={`bg-yellow-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded`}
+                                                        onClick={() =>
+                                                            toogleDishToCart(
+                                                                dish._id
+                                                            )
+                                                        }
+                                                    >
+                                                        Commander
+                                                    </button>
+                                                )}
                                                 <svg
-                                                    className={`h-8 w-8 text-${
+                                                    className={
                                                         cartDishIds.includes(
                                                             dish._id
                                                         )
-                                                            ? "green"
-                                                            : "yellow"
-                                                    }-600`}
+                                                            ? "h-8 w-8 text-green-600"
+                                                            : "h-8 w-8 text-yellow-600"
+                                                    }
                                                     width="24"
                                                     height="24"
                                                     viewBox="0 0 24 24"
