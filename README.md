@@ -11,26 +11,27 @@ You are here on the project's front-end repository
 
 ### Dependencies
 
--   Nodejs : [nodejs.org](https://nodejs.org/en/download/)
+![Node.js](https://img.shields.io/badge/node.js-v14-339933?logo=nodedotjs&logoColor=white&labelColor=339933&color=white)
+![npm](https://img.shields.io/badge/npm-v10-CB3837?logo=npm&logoColor=white&labelColor=CB3837&color=white)
 
 ### Installing
 
--   Create copy of **.env.example** ans replace by **.env** file and replace with your environnements parameters
+- Create copy of **.env.example** ans replace by **.env** file and replace with your environnements parameters
 
--   Dependencies installation :
+- Dependencies installation :
 
 ```shell
 npm i
 ```
 
--   Launch dev server
+- Run dev server
 
 ```shell
 npm run dev
 ```
 
--   Front-end is accessible on [localhost:5173](http://localhost:5173/)
+- Front-end is accessible on [localhost:5173](http://localhost:5173/)
 
-## Authors
+## License
 
-Mathieu Besson [@MathieuBesson3](https://twitter.com/BessonMathieu3)
+This project is licensed under the GPL License. See the [LICENSE](./LICENSE) file for more details.
